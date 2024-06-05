@@ -51,5 +51,5 @@
         "temp/": true,
         "Temp/": true
     },
-    "dotnet.defaultSolution": "XR 3D Setup.sln"
+    "dotnet.defaultSolution": "Unity-XR-Setup.sln"
 }
