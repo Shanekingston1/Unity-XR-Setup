@@ -5,7 +5,7 @@ public class OVRCameraMovement : MonoBehaviour
     public float speed = 3.0f;
     public float rotationSpeed = 90.0f;
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
          Vector3 direction = Vector3.zero;
 
