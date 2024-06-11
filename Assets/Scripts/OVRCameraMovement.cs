@@ -3,7 +3,7 @@ using UnityEngine;
 public class OVRCameraMovement : MonoBehaviour
 {
     public float speed = 3.0f;
-    public float rotationSpeed = 90.0f;
+    //public float rotationSpeed = 90.0f;
     // Update is called once per frame
     void FixedUpdate()
     {
@@ -30,9 +30,9 @@ public class OVRCameraMovement : MonoBehaviour
         transform.Translate(direction);
 
          // Handle continuous rotation
-        Vector2 primaryThumbstick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
+        /*Vector2 primaryThumbstick = OVRInput.Get(OVRInput.Axis2D.PrimaryThumbstick);
         float rotationAmount = primaryThumbstick.x * rotationSpeed * Time.deltaTime;
-        transform.Rotate(0, rotationAmount, 0);
+        transform.Rotate(0, rotationAmount, 0);*/
 
     }
 }
