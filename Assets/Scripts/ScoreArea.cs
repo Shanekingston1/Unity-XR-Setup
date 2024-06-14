@@ -6,7 +6,7 @@ public class ScoreArea : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        gameManager=GameObject.FindGameObjectWithTag("Logic").GetComponent<GameManager>();
+        gameManager = GameObject.FindGameObjectWithTag("Logic").GetComponent<GameManager>();
     }
 
     private void OnTriggerEnter(Collider collision) 
