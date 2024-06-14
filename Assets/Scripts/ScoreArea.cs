@@ -11,7 +11,7 @@ public class ScoreArea : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision) 
     {
-        if(collision.gameObject.layer == 3)
+        if(collision.gameObject.layer == 8 && collision.gameObject.layer == 3)
         {
             gameManager.addScore();
         }
