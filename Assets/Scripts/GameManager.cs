@@ -1,11 +1,54 @@
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
+
     public int playerScore;
     public Text ScoreText;
     public Text HighScoreText;
 
+    private bool hasHitRacket = false;
+    private bool hasHitWall = false;
+    [SerializeField] private int score = 0; 
+    [SerializeField] private int racketLayer = 8; 
+    [SerializeField] private int wallLayer = 9;   
+
+    public void OnCollisionEnter(Collision collision)
+    {
+        HandleCollision(collision.gameObject);
+    }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        HandleCollision(other.gameObject);
+    }
+
+    private void HandleCollision(GameObject obj)
+    {
+        if (obj.layer == racketLayer)
+        {
+            hasHitRacket = true;
+            hasHitWall = false; // Reset wall hit
+        }
+        else if (obj.layer == wallLayer)
+        {
+            if (hasHitRacket && !hasHitWall)
+            {
+                score++;
+                Debug.Log("Score: " + score);
+                hasHitWall = true; // Ensure it only scores once per valid sequence
+                addScore();
+            }
+        }
+        else
+        {
+            // Reset if it hits anything else first
+            hasHitRacket = false;
+            hasHitWall = false;
+        }
+    }
+    
     public void addScore()
     {
         playerScore ++;
