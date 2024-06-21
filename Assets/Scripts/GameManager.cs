@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
 
     private bool hasHitRacket = false;
     private bool hasHitWall = false;
-    [SerializeField] private int score = 0; 
     [SerializeField] private int racketLayer = 8; 
     [SerializeField] private int wallLayer = 9;   
 
@@ -35,8 +34,8 @@ public class GameManager : MonoBehaviour
         {
             if (hasHitRacket && !hasHitWall)
             {
-                score++;
-                Debug.Log("Score: " + score);
+                playerScore++;
+                Debug.Log("Score: " + playerScore);
                 hasHitWall = true; // Ensure it only scores once per valid sequence
                 addScore();
             }
