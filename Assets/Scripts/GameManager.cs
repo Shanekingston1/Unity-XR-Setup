@@ -34,10 +34,10 @@ public class GameManager : MonoBehaviour
         {
             if (hasHitRacket && !hasHitWall)
             {
-                playerScore++;
+                addScore();
+                CheckHighScore();
                 Debug.Log("Score: " + playerScore);
                 hasHitWall = true; // Ensure it only scores once per valid sequence
-                addScore();
             }
         }
         else
@@ -52,7 +52,6 @@ public class GameManager : MonoBehaviour
     {
         playerScore ++;
         ScoreText.text = playerScore.ToString();
-        CheckHighScore();
     }
 
     void CheckHighScore()
