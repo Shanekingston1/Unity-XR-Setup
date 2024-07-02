@@ -19,10 +19,10 @@ TagManager:
   - Interactable
   - Racket
   - Wall
-  - 
-  - 
-  - 
-  - 
+  - Grabbing
+  - Grabbable
+  - Hand
+  - HandPlayer
   - 
   - 
   - 

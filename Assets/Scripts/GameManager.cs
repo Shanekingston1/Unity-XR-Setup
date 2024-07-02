@@ -18,6 +18,11 @@ public class GameManager : MonoBehaviour
         HandleCollision(collision.gameObject);
     }
 
+    private void Start()
+    {
+        PlayerPrefs.DeleteKey("HighScore");
+    }
+
     public void OnTriggerEnter(Collider other)
     {
         HandleCollision(other.gameObject);
