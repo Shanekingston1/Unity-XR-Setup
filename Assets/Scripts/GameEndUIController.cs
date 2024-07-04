@@ -21,6 +21,6 @@ public class GameEndUIController : MonoBehaviour
 
     public void MenuButton()
     {
-        SceneManager.LoadScene("Main Menu");
+        SceneManager.LoadScene("1 Start Scene");
     }
 }

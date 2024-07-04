@@ -59,7 +59,5 @@ public class Timer : MonoBehaviour
     {
         timerText.text = currentTime.ToString("0.0");
     }
-
     
-
 }
