@@ -3,16 +3,20 @@ using UnityEngine.SceneManagement;
 
 public class GameEndUIController : MonoBehaviour
 {
-    public GameObject content;
+    public GameObject gameEndContent;
+    
+    public bool isPaused;
 
     private void Start()
     {
-        content.gameObject.SetActive(false);
+        gameEndContent.gameObject.SetActive(false);
+        
     }
+
 
     public void OnTimerEnd()
     {
-        content.gameObject.SetActive(true);
+        gameEndContent.gameObject.SetActive(true);
     }
    public void RestartButton()
     {
@@ -23,4 +27,10 @@ public class GameEndUIController : MonoBehaviour
     {
         SceneManager.LoadScene("1 Start Scene");
     }
+
+   
+
+
+    
+ 
 }
