@@ -19,10 +19,24 @@ public class Timer : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnTimerEnd;
     private bool timeEnded= false;
-    // Start is called before the first frame update
-    void Start()
+  
+    public static Timer instance;
+
+    void Awake()
     {
-        
+        if(instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+      private void Start()
+    {
+        // Access the timerValue from SetOptionFromUI
+        currentTime = SetOptionFromUI.timerValue;
     }
 
     // Update is called once per frame
@@ -54,6 +68,20 @@ public class Timer : MonoBehaviour
             
         } 
     } 
+
+    public void UpdateCurrentTime(float timerValue)
+    {
+        timerValue = currentTime;
+    }
+
+    /*public static void SetTimerLimit(float newLimit)
+    {
+        if(instance!=null)
+        {
+            instance.currentTime = SetOptionFromUI.timerValue;
+        }
+        
+    }*/
 
     private void SetTimerText()
     {

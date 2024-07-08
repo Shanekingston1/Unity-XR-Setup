@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,10 +5,12 @@ public class PauseMenu : MonoBehaviour
 {
     public GameObject pauseContent;
     private  bool isPaused;
+    
     // Start is called before the first frame update
     void Start()
     {
         pauseContent.gameObject.SetActive(false);
+        
     }
 
     private void Update()
@@ -20,7 +20,6 @@ public class PauseMenu : MonoBehaviour
             if (isPaused)
             {
                 ResumeGame();
-                
             }
             else
             {
@@ -33,7 +32,7 @@ public class PauseMenu : MonoBehaviour
     public void RestartButton()
     {
         SceneManager.LoadScene("MainScene");
-        Time.timeScale = 1f;
+        //Time.timeScale = 1f;
     }
 
     public void MenuButton()
@@ -45,12 +44,14 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 0f;
         pauseContent.gameObject.SetActive(true);
+        isPaused = true;
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1f;
         pauseContent.gameObject.SetActive(false);
+        isPaused=false;
     }
 
     public void QuitGame()

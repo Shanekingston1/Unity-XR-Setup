@@ -5,14 +5,12 @@ public class GameEndUIController : MonoBehaviour
 {
     public GameObject gameEndContent;
     
-    public bool isPaused;
-
     private void Start()
     {
         gameEndContent.gameObject.SetActive(false);
+        Time.timeScale=1f;
         
     }
-
 
     public void OnTimerEnd()
     {
@@ -21,6 +19,7 @@ public class GameEndUIController : MonoBehaviour
    public void RestartButton()
     {
         SceneManager.LoadScene("MainScene");
+
     }
 
     public void MenuButton()
@@ -28,9 +27,4 @@ public class GameEndUIController : MonoBehaviour
         SceneManager.LoadScene("1 Start Scene");
     }
 
-   
-
-
-    
- 
 }
