@@ -3,11 +3,9 @@ using UnityEngine;
 using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
-
     public int playerScore;
     public Text ScoreText;
     public Text HighScoreText;
-
     private bool hasHitRacket = false;
     private bool hasHitWall = false;
     [SerializeField] private int racketLayer = 8; 

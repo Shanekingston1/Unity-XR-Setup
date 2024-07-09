@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 using TMPro;
 
 public class SetOptionFromUI : MonoBehaviour
 {
     public Scrollbar volumeSlider;
-    public TMPro.TMP_Dropdown timerDropdown;
-    public static float timerValue;
+    public TMP_Dropdown timerDropdown;
+    public float timerValue;
 
     private void Start()
     {
@@ -42,22 +41,17 @@ public class SetOptionFromUI : MonoBehaviour
                 break;
             }
         }
+        timerDropdown.onValueChanged.AddListener(UpdateTimerValue);
     }
 
-     public void UpdateTimerValue(int newValue)
+    public void UpdateTimerValue(int newValue)
     {
         string[] timerOptions = new string[] { "30 seconds","45 Seconds", "1 minute", "2 minutes"};
         int[] timerValues = new int[] { 30, 45, 60, 120};
 
         timerValue = timerValues[newValue];
         PlayerPrefs.SetFloat("TimerValue", timerValue);
-
-        // Get the Timer script and update the currentTime
-        Timer timer = GameObject.FindObjectOfType<Timer>();
-        if (timer!= null)
-        {
-            timer.UpdateCurrentTime(timerValue);
-        }
+        
     }
     
     public void SetGlobalVolume(float value)

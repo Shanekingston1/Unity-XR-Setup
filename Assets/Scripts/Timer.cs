@@ -1,7 +1,7 @@
 using UnityEngine;
 using TMPro;
-using UnityEngine.SceneManagement;
 using UnityEngine.Events;
+using System;
 
 public class Timer : MonoBehaviour
 {
@@ -9,7 +9,7 @@ public class Timer : MonoBehaviour
     public TextMeshProUGUI timerText;
 
     [Header("Timer Settings")]
-    public float currentTime;
+    public float currentTime = 30f;
     public bool countDown;
 
     [Header("Limit Settings")]
@@ -19,26 +19,7 @@ public class Timer : MonoBehaviour
     [Header("Events")]
     public UnityEvent OnTimerEnd;
     private bool timeEnded= false;
-  
-    public static Timer instance;
-
-    void Awake()
-    {
-        if(instance == null)
-        {
-            instance = this;
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-      private void Start()
-    {
-        // Access the timerValue from SetOptionFromUI
-        currentTime = SetOptionFromUI.timerValue;
-    }
-
+    
     // Update is called once per frame
     void Update()
     {
@@ -53,7 +34,7 @@ public class Timer : MonoBehaviour
             SetTimerText();
         }
 
-        if((hasLimit &&  ((countDown && currentTime <= timerLimit) || (!countDown && currentTime >= timerLimit))))
+        if(hasLimit &&  ((countDown && currentTime <= timerLimit) || (!countDown && currentTime >= timerLimit)))
         {
             currentTime = timerLimit;
             SetTimerText();
@@ -69,23 +50,18 @@ public class Timer : MonoBehaviour
         } 
     } 
 
-    public void UpdateCurrentTime(float timerValue)
-    {
-        timerValue = currentTime;
-    }
-
-    /*public static void SetTimerLimit(float newLimit)
-    {
-        if(instance!=null)
-        {
-            instance.currentTime = SetOptionFromUI.timerValue;
-        }
-        
-    }*/
-
     private void SetTimerText()
     {
         timerText.text = currentTime.ToString("0.0");
     }
-    
+
+    internal void SetTime(float timerValue)
+    {
+        throw new NotImplementedException();
+    }
+
+    public static implicit operator Timer(float v)
+    {
+        throw new NotImplementedException();
+    }
 }
