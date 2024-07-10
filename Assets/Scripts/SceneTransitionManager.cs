@@ -1,10 +1,24 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class SceneTransitionManager : MonoBehaviour
 {
-    public void StartButton()
+    public FadeScreen fadeScreen;
+
+    public void GoToScene(int sceneIndex)
     {
-        SceneManager.LoadScene("MainScene");
+        StartCoroutine(GoToSceneRoutine(sceneIndex));
     }
+    
+    
+    IEnumerator GoToSceneRoutine(int sceneIndex)
+    {
+        fadeScreen.FadeOut();
+        yield return new WaitForSeconds(fadeScreen.fadeDuration);
+
+        //Launch the new scene
+        SceneManager.LoadScene(sceneIndex);
+    }
+    
 }

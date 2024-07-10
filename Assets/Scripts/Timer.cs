@@ -20,6 +20,18 @@ public class Timer : MonoBehaviour
     public UnityEvent OnTimerEnd;
     private bool timeEnded= false;
     
+    private void Start()
+    {
+        if (PersistentData.Instance != null)
+        {
+            currentTime = PersistentData.Instance.TimerValue;
+        }
+        else
+        {
+            currentTime = 30f;
+        }
+    }
+    
     // Update is called once per frame
     void Update()
     {
@@ -53,15 +65,5 @@ public class Timer : MonoBehaviour
     private void SetTimerText()
     {
         timerText.text = currentTime.ToString("0.0");
-    }
-
-    internal void SetTime(float timerValue)
-    {
-        throw new NotImplementedException();
-    }
-
-    public static implicit operator Timer(float v)
-    {
-        throw new NotImplementedException();
     }
 }

@@ -14,6 +14,16 @@ public class SetOptionFromUI : MonoBehaviour
     {
         volumeSlider.onValueChanged.AddListener(SetGlobalVolume);
 
+        // Set the initial timer value from PersistentData
+        if (PersistentData.Instance != null)
+        {
+            timerValue = PersistentData.Instance.TimerValue;
+        }
+        else
+        {
+            timerValue = 30f;
+        }
+
         // Set the initial timer value from PlayerPrefs
         timerValue = PlayerPrefs.GetFloat("TimerValue", 30f);
 
@@ -51,6 +61,11 @@ public class SetOptionFromUI : MonoBehaviour
 
         timerValue = timerValues[newValue];
         PlayerPrefs.SetFloat("TimerValue", timerValue);
+
+          if (PersistentData.Instance != null)
+        {
+            PersistentData.Instance.TimerValue = timerValue;
+        }
         
     }
     
