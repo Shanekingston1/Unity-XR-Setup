@@ -20,5 +20,10 @@ public class SceneTransitionManager : MonoBehaviour
         //Launch the new scene
         SceneManager.LoadScene(sceneIndex);
     }
+
+    public void StartButton()
+    {
+        SceneManager.LoadScene("MainScene");
+    }
     
 }
