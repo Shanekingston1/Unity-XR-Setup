@@ -9,7 +9,6 @@ public class GameEndUIController : MonoBehaviour
     {
         gameEndContent.gameObject.SetActive(false);
         Time.timeScale=1f;
-        
     }
 
     public void OnTimerEnd()
