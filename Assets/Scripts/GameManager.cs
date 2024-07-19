@@ -1,11 +1,12 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 public class GameManager : MonoBehaviour
 {
     public int playerScore;
-    public Text ScoreText;
-    public Text HighScoreText;
+    public TextMeshPro ScoreText;
+    public TextMeshProUGUI HighScoreText;
     private bool hasHitRacket = false;
     private bool hasHitWall = false;
     [SerializeField] private int racketLayer = 8; 
@@ -68,6 +69,6 @@ public class GameManager : MonoBehaviour
 
     void UpdateHighScore()
     {
-        HighScoreText.text = $"High Score:{PlayerPrefs.GetInt("High Score", 0)}";
+        HighScoreText.text = $"H.Score:{PlayerPrefs.GetInt("High Score", 0)}";
     }
 }

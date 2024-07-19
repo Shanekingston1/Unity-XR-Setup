@@ -6,9 +6,9 @@ using TMPro;
 
 public class SetOptionFromUI : MonoBehaviour
 {
-    public Scrollbar volumeSlider;
+    public Slider volumeSlider;
     public TMP_Dropdown timerDropdown;
-    public float timerValue;
+    public float timerValue = 30f;
 
     private void Start()
     {
@@ -63,9 +63,9 @@ public class SetOptionFromUI : MonoBehaviour
         PlayerPrefs.SetFloat("TimerValue", timerValue);
 
           if (PersistentData.Instance != null)
-        {
+          {
             PersistentData.Instance.TimerValue = timerValue;
-        }
+          }
         
     }
     
