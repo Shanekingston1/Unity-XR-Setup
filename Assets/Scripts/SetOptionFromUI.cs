@@ -28,8 +28,8 @@ public class SetOptionFromUI : MonoBehaviour
         timerValue = PlayerPrefs.GetFloat("TimerValue", 30f);
 
         // Set the Dropdown options
-        string[] timerOptions = new string[] { "30 seconds", "45 seconds", "1 minute", "2 minutes"};
-        float[] timerValues = new float[] { 30f, 45f, 60f, 120f};
+        string[] timerOptions = new string[] { "30 seconds", "45 seconds", "1 minute", "2 minutes", "4 minutes"};
+        float[] timerValues = new float[] { 30f, 45f, 60f, 120f, 240f};
 
         // Create a list of Dropdown options
         List<TMP_Dropdown.OptionData> options = new List<TMP_Dropdown.OptionData>();
@@ -56,8 +56,8 @@ public class SetOptionFromUI : MonoBehaviour
 
     public void UpdateTimerValue(int newValue)
     {
-        string[] timerOptions = new string[] { "30 seconds","45 Seconds", "1 minute", "2 minutes"};
-        int[] timerValues = new int[] { 30, 45, 60, 120};
+        string[] timerOptions = new string[] { "30 seconds","45 Seconds", "1 minute", "2 minutes", "240 minutes"};
+        int[] timerValues = new int[] { 30, 45, 60, 120, 240};
 
         timerValue = timerValues[newValue];
         PlayerPrefs.SetFloat("TimerValue", timerValue);
