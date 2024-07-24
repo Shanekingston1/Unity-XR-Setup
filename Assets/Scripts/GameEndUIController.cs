@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 public class GameEndUIController : MonoBehaviour
 {
     public GameObject gameEndContent;
+    public GameManager gameManager;
     
     private void Start()
     {
@@ -13,13 +14,14 @@ public class GameEndUIController : MonoBehaviour
 
     public void OnTimerEnd()
     {
+        gameManager.DisplayFinalScore();
         gameEndContent.gameObject.SetActive(true);
     }
    public void RestartButton()
-    {
+   {
         SceneManager.LoadScene("MainScene");
 
-    }
+   }
 
     public void MenuButton()
     {

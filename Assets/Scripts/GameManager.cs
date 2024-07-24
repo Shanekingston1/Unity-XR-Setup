@@ -7,6 +7,7 @@ public class GameManager : MonoBehaviour
     public int playerScore;
     public TextMeshPro ScoreText;
     public TextMeshProUGUI HighScoreText;
+    public TextMeshProUGUI FinalScoreText;
     private bool hasHitRacket = false;
     private bool hasHitWall = false;
     [SerializeField] private int racketLayer = 8; 
@@ -65,6 +66,16 @@ public class GameManager : MonoBehaviour
             PlayerPrefs.SetInt("High Score", playerScore);
             UpdateHighScore();
         }
+    }
+
+    public void DisplayFinalScore()
+    {
+        FinalScoreText.text = playerScore.ToString();
+    }
+
+    void UpdateFinalScore()
+    {
+        FinalScoreText.text = $"{playerScore}";
     }
 
     void UpdateHighScore()
