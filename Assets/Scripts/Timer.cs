@@ -18,7 +18,6 @@ public class Timer : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent OnTimerEnd;
-    private bool timeEnded= false;
     
     private void Start()
     {
@@ -56,9 +55,7 @@ public class Timer : MonoBehaviour
 
         if(currentTime == timerLimit)
         {
-            timeEnded = true;
-            OnTimerEnd.Invoke();
-            
+            OnTimerEnd.Invoke();   
         } 
     } 
 

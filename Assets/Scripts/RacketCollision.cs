@@ -2,66 +2,54 @@ using UnityEngine;
 
 public class RacketCollision : MonoBehaviour
 {
-    public float sphereRadius = 0.5f; 
-    public LayerMask ballLayer; 
-    public float collisionForce; 
+    public GameObject Tennisball;
+    public float collisionForce = 10f;
+    public float collisionThreshold = 0.1f;
 
-    private bool hasCollided = false;
+    private Vector3 ballVelocity;
+    private Vector3 racketVelocity;
+    private float ballMass;
+    private float racketMass;
 
     void Start()
     {
-        // Set collision detection mode for the ball
-        GameObject ball = GameObject.FindGameObjectWithTag("TennisBall");
-        if (ball != null)
+        ballMass = Tennisball.GetComponent<Rigidbody>().mass;
+        racketMass = GetComponent<Rigidbody>().mass;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject == Tennisball)
         {
-            Rigidbody ballRigidbody = ball.GetComponent<Rigidbody>();
-            if (ballRigidbody != null)
+            ballVelocity = Tennisball.GetComponent<Rigidbody>().velocity;
+            racketVelocity = GetComponent<Rigidbody>().velocity;
+
+            // Calculate the relative velocity between the ball and racket
+            Vector3 relativeVelocity = ballVelocity - racketVelocity;
+
+            // Check if the collision is valid (i.e., the ball is moving towards the racket)
+            if (Vector3.Dot(relativeVelocity, transform.forward) > collisionThreshold)
             {
-                ballRigidbody.collisionDetectionMode = CollisionDetectionMode.Continuous;
+                // Calculate the impulse to apply to the ball
+                Vector3 impulse = CalculateImpulse(relativeVelocity, ballMass, racketMass);
+
+                // Apply the impulse to the ball
+                Tennisball.GetComponent<Rigidbody>().AddForce(impulse, ForceMode.Impulse);
+
+                // Reposition the ball to avoid further collision detection
+                Tennisball.transform.position += impulse.normalized * collisionForce;
             }
         }
     }
 
-    void FixedUpdate()
+    Vector3 CalculateImpulse(Vector3 relativeVelocity, float ballMass, float racketMass)
     {
-        if (!hasCollided)
-        {
-            // Position of the racket
-            Vector3 racketPosition = transform.position;
+        // Calculate the coefficient of restitution (COR) for the collision
+        float COR = 0.7f; // adjust this value to fine-tune the collision response
 
-            // Check for collisions
-            Collider[] hitColliders = Physics.OverlapSphere(racketPosition, sphereRadius, ballLayer);
+        // Calculate the impulse to apply to the ball
+        Vector3 impulse = (1 + COR) * relativeVelocity * ballMass / (ballMass + racketMass);
 
-            foreach (var hitCollider in hitColliders)
-            {
-                // If a collision with the ball is detected
-                if (hitCollider.CompareTag("TennisBall"))
-                {
-                    // Handle the collision (e.g., apply force to the ball)
-                    Rigidbody ballRigidbody = hitCollider.GetComponent<Rigidbody>();
-                    if (ballRigidbody != null)
-                    {
-                        Vector3 forceDirection = (hitCollider.transform.position - racketPosition).normalized;
-                        ballRigidbody.AddForce(forceDirection * collisionForce); // Adjust force as needed
-                        hasCollided = true;
-                    }
-                }
-            }
-        }
-    }
-
-    void OnDrawGizmos()
-    {
-        // Draw the overlap sphere in the editor for debugging purposes
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, sphereRadius);
-    }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("TennisBall"))
-        {
-            hasCollided = false; // Reset flag when the ball exits the collision
-        }
+        return impulse;
     }
 }
