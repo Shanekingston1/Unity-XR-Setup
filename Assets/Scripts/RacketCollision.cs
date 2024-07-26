@@ -45,7 +45,7 @@ public class RacketCollision : MonoBehaviour
     Vector3 CalculateImpulse(Vector3 relativeVelocity, float ballMass, float racketMass)
     {
         // Calculate the coefficient of restitution (COR) for the collision
-        float COR = 0.728f; // adjust this value to fine-tune the collision response
+        float COR = 0.7f; // adjust this value to fine-tune the collision response
 
         // Calculate the impulse to apply to the ball
         Vector3 impulse = (1 + COR) * relativeVelocity * ballMass / (ballMass + racketMass);
